@@ -18,32 +18,84 @@ a {
 	text-decoration: none;
 }
 
+body.before-load {
+	overflow: hidden;
+}
 .container {
 	/* iPhone 가로 스크롤 방지 */
 	overflow-x: hidden;
 }
+.global-nav {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 10;
+	width: 100%;
+	height: 44px;
+	padding: 0 1rem;
+}
+.local-nav {
+	position: absolute;
+	top: 45px;
+	left: 0;
+	z-index: 11;
+	width: 100%;
+	height: 52px;
+	padding: 0 1rem;
+	border-bottom: 1px solid #ddd;
+}
+.local-nav-sticky .local-nav {
+	position: fixed;
+	top: 0;
+	background: rgba(255, 255, 255, 0.1);
+	/* for iPhone */
+	-webkit-backdrop-filter: saturate(180%) blur(15px);
+	-moz-backdrop-filter: saturate(180%) blur(15px);
+	-o-backdrop-filter: saturate(180%) blur(15px);
+	backdrop-filter: saturate(180%) blur(15px);
+}
+.global-nav-links,
+.local-nav-links {
+	display: flex;
+	align-items: center;
+	max-width: 1000px;
+	height: 100%;
+	margin: 0 auto;
+}
+.global-nav-links {
+	justify-content: space-between;
+}
+.local-nav-links .product-name {
+	margin-right: auto;
+	font-size: 1.4rem;
+	font-weight: bold;
+}
+.local-nav-links a {
+	font-size: 0.8rem;
+}
+.local-nav-links a:not(.product-name) {
+	margin-left: 2em;
+}
 .scroll-section {
 	position: relative;
 	padding-top: 50vh;
-	color: #fff;
 }
 #scroll-section-0 h1 {
 	position: relative;
 	top: -10vh;
 	z-index: 5;
-	font-size: 3.5rem;
+	font-size: 4rem;
 	text-align: center;
 }
 .main-message {
-	top: 40vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 35vh;
+	margin: 5px 0;
+	height: 3em;
 	font-size: 2.5rem;
 	opacity: 0;
-}
-.main-message.b {
-	font-size: 3.5rem;
-}
-.main-message.c {
-	font-size: 4.5rem;
 }
 .main-message p {
 	font-weight: bold;
@@ -55,12 +107,64 @@ a {
 	margin-bottom: 0.5em;
 	font-size: 1.2rem;
 }
+#scroll-section-2 .main-message {
+	font-size: 3.5rem;
+}
+.description {
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 0 1rem;
+	font-size: 1.2rem;
+	color: #888;
+}
+.description strong {
+	float: left;
+	margin-right: 0.2em;
+	font-size: 3rem;
+	color: rgb(29, 29, 31);
+}
+.sticky-elem.desc-message {
+	width: 45%;
+	font-weight: bold;
+	opacity: 0;
+}
+.pin {
+	width: 1px;
+	height: 100px;
+	background: rgb(29, 29, 31);
+}
+#scroll-section-2 .b {
+	top: 10%;
+	left: 40%;
+}
+#scroll-section-2 .c {
+	top: 15%;
+	left: 45%;
+}
 .mid-message {
 	max-width: 1000px;
 	margin: 0 auto;
 	padding: 0 1rem;
 	font-size: 2rem;
 	color: #888;
+}
+.mid-message strong {
+	color: rgb(29, 29, 31);
+}
+.canvas-caption {
+	max-width: 1000px;
+	margin: -24rem auto 0;
+	padding: 0 1rem;
+	font-size: 1.2rem;
+	color: #888;
+}
+.footer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 7rem;
+	color: white;
+	background: darkorange;
 }
 .sticky-elem {
 	display: none;
@@ -69,7 +173,9 @@ a {
 	width: 100%;
 }
 #show-scene-0 #scroll-section-0 .sticky-elem,
-#show-scene-1 #scroll-section-1 .sticky-elem {
+#show-scene-1 #scroll-section-1 .sticky-elem,
+#show-scene-2 #scroll-section-2 .sticky-elem,
+#show-scene-3 #scroll-section-3 .sticky-elem {
 	display: block;
 	will-change: transform, opacity;
 }
@@ -77,8 +183,24 @@ a {
 	/* 스크롤 효과가 모두 끝나고, 아래 일반 콘텐츠 영역에서는 sticky-elem들을 모두 안보이도록 */
 	display: none !important;
 }
-.normal-content {
-	padding: 20vh 0;
+.sticky-elem-canvas {
+	top: 0;
+	height: 100%;
+}
+.sticky-elem-canvas canvas {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+}
+#scroll-section-3 {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.image-blend-canvas.sticky {
+	position: fixed;
+	top: 0;
+	z-index: 10;
 }
 .loading {
 	display: flex;
@@ -121,36 +243,14 @@ a {
 	stroke-dashoffset: 0;
 	fill: transparent;
 	animation: loading-circle-ani 1s infinite;
+	/* transition: 1s; */
 }
+/* .loading-circle:hover circle {
+	stroke-dashoffset: -157;
+} */
 
-.pencil-logo {
-	left: 50%;
-	top: 50%;
-	width: 1000vw;
-	transform: translate(-10%, -50%);
-}
-.pencil {
-	left: auto;
-	top: auto;
-	right: -10%;
-	bottom: -80%;
-	width: 3.5vw;
-	transform: rotate(-120deg);
-}
-.ribbon-path {
-	left: 50%;
-	top: 50%;
-	min-width: 850px;
-	transform: translate(-50%, -50%);
-}
-.ribbon-path path {
-	fill: none;
-	stroke: #FF0044;
-	stroke-width: 62;
-	stroke-linecap: round;
-	stroke-linejoin: round;
-	stroke-dasharray: 1401, 1401;
-	stroke-dashoffset: 1401;
+.normal-content {
+	margin-bottom: 10rem;
 }
 
 @media (min-width: 1024px) {
@@ -160,18 +260,37 @@ a {
 	.main-message {
 		font-size: 4vw;
 	}
-	.main-message.b {
-		font-size: 7vw;
+	.description {
+		padding: 0;
+		font-size: 2rem;
 	}
-	.main-message.c {
-		font-size: 10vw;
+	.description strong {
+		font-size: 6rem;
+	}
+	#scroll-section-2 .main-message {
+		font-size: 6vw;
 	}
 	.main-message small {
 		font-size: 1.5vw;
+	}
+	.sticky-elem.desc-message {
+		width: 20%;
+	}
+	#scroll-section-2 .b {
+		top: 20%;
+		left: 53%;
+	}
+	#scroll-section-2 .c {
+		left: 55%;
 	}
 	.mid-message {
 		width: 1000px;
 		padding: 0;
 		font-size: 4vw;
+	}
+	.canvas-caption {
+		margin-top: -8rem;
+		padding: 0;
+		font-size: 2rem;
 	}
 }

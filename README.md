@@ -9,11 +9,16 @@
 
 ## 1. 생각
 
-- __1-1. 작업 시작__
-  * __(22/04/21)__ html구조 짜는것부터 시작해 천천히 svg, canvas 처리 하는법을 배운다.
+- **1-1. 작업 시작**
+  - **(22/04/21)** html구조 짜는것부터 시작해 천천히 svg, canvas 처리 하는법을 배운다.
     아직까지는 따라할만하다! 😎
-* (22/04/22) rem / em
+
+* (22/04/22)
+
+  ## rem / em
+
   - 소스코드
+
   ```CSS
   html {
     font-family: "Noto Sans KR", sans-serif;
@@ -24,7 +29,9 @@
     height: 3em;
   }
   ```
-  ## 질문 ) font-size만 rem 사용하고, 나머지 값들은 em을 사용하는 이유?
+
+  ### 질문 ) font-size만 rem 사용하고, 나머지 값들은 em을 사용하는 이유?
+
   1. REM : height를 rem으로 사용하게되면 rem 특성상
      root element (부모 엘리먼트)font-size 기준 \* 입력숫자로 처리 된다.
      ```Javascript
@@ -36,11 +43,25 @@
        (root 14px * 2.4배) * 3배 = 105px
      ```
 
-- __1-2. 혹시?__
+  ## mobile -> desktop (@media문으로 반응형 처리)
+
+  - @media 반응형 처리땐, root font-size기준이 아닌 view port 기준으로 작업 진행 (화면 늘어났다 줄어들었다에 맞춰 폰트사이즈 자동 처리 )
+
+  ```css
+  @media (min-width: 1024px) {
+    #scroll-section-0 {
+      font-size: 9vw;
+    }
+  }
+  ```
+
+  ## Scroll animation timeline
+
+- **1-2. 혹시?**
 
 *
 
-- __1-3. 성공?__
+- **1-3. 성공?**
 
 *
 
